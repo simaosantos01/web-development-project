@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button (click)="clickMenu()" class="icon" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="small-spacer"></span>
+  <div class="logo">
+    <mat-icon>book</mat-icon>
+    <span>BookStore</span>
+  </div>
+  <span class="spacer"></span>
+  <mat-search-bar #searched (input)="onSearchTextChanged(searched.value)"></mat-search-bar>
+  <button class="icon space-left" mat-icon-button routerLink="/shopping_cart">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <button (click)="onAccount()" class="icon" mat-icon-button>
+    <mat-icon>person</mat-icon>
+  </button>
+  <button (click)="onLogout()" *ngIf="isAuthenticated" class="icon" mat-icon-button>
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+

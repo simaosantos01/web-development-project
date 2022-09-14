@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>{{book.title}}</h1>
+<div mat-dialog-content>
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col-sm">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+                    class="rounded" alt="..." *ngIf="book.image == ''">
+                <img src="{{book.image}}" alt="" *ngIf="book.image != ''">
+            </div>
+            <div class="col-md-auto margin-top ">
+                <div class="row">
+                    <p class="mb-1"><strong>Publisher: </strong> {{book.publisher}}</p>
+                </div>
+                <div class="row">
+                    <p class="mb-1"><strong>Publisher Date: </strong> {{book.published_date}}</p>
+                </div>
+                <div class="row">
+                    <p class="mb-1"><strong>Language: </strong> {{book.language}}</p>
+                </div>
+                <div class="row">
+                    <p class="mb-1"><strong>Pages: </strong> {{book.pages}}</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <p class="mb-1"><strong>Author/s: </strong></p>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="row" *ngFor="let author of book.authors">
+                            <p class="mb-1">- {{author}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <ngb-rating [rate]="book.rate" #rate (click)="handleReview(rate)"></ngb-rating>
+                    <div class="margin-left">
+                        <span class="margin-left">{{book.num_of_reviews}} Reviews</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Description
+                </mat-panel-title>
+                <mat-panel-description>
+                    Expand
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{book.description}}</p>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="close()">Close</button>
+</div>

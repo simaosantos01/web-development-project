@@ -1,0 +1,45 @@
+<section id="books-table">
+    <div class="col-md-6">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" #element (click)="openBookPopUp(element.id)"
+                *ngFor="let item of injectBooks() | paginate: { itemsPerPage: 5, currentPage: p}"
+                id="view-book-{{item.isbn}}">
+                <div class="list-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+                        class="rounded" alt="..." *ngIf="item.image == ''">
+                    <img src="{{item.image}}" class="rounded" alt="..." *ngIf="item.image != ''">
+                    <div class="list-item-details">
+                        <p class="mb-1">{{item.title}}</p>
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <h5 class="mb-1">ISBN: {{item.isbn}}</h5>
+                            </div>
+                            <div class="col-md-auto">
+                                <h5 class="mb-1">Language: {{item.language}}</h5>
+                            </div>
+                            <div class="col-md-auto">
+                                <h5 class="mb-1">Pages: {{item.pages}}</h5>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-auto">
+                                <h5 class="mb-1">Author/s:</h5>
+                                <div *ngFor="let author of item.authors">
+                                    <h5 class="mb-1">- {{author}}</h5>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                        </div>
+                    </div>
+                    <div class="list-item-button">
+                        <span>{{item.price_new}}€ </span>
+                        <button mat-icon-button>
+                            <mat-icon class="navbar-content-icon" (click)="addToCart($event)" id="{{item.isbn}}">
+                                add_shopping_cart</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <pagination-controls class="my-pagination" (pageChange)="p=$event"></pagination-controls>
+    </div>
+</section>

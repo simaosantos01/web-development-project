@@ -1,0 +1,75 @@
+<mat-tab-group (selectedTabChange)="refresh()" mat-align-tabs="center">
+  <mat-tab *ngIf="getTypeAccount() == 'Customer'" label="Purchases Dashboard">
+    <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="metric">
+        <th *matHeaderCellDef mat-header-cell> metrics</th>
+        <td *matCellDef="let element" mat-cell> {{element.metric}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="value">
+        <th *matHeaderCellDef mat-header-cell> quantity</th>
+        <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Change account">
+    <form (ngSubmit)="onSubmitButtonForm()" [formGroup]="customerForm" class="full-center">
+      <mat-toolbar class="full-center">
+        <span id="cust"></span>
+      </mat-toolbar>
+      <mat-card-content>
+        <mat-form-field class="full-width">
+          <mat-label>Name</mat-label>
+          <input [value]="name" formControlName="name" matInput placeholder="Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Birth Date</mat-label>
+          <input [value]="birth_date" formControlName="birth_date" matInput placeholder="birth_date" type="date">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Country</mat-label>
+          <input [value]="country" formControlName="country" matInput placeholder="Country">
+        </mat-form-field>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [value]="gender" formControlName="gender">
+          <mat-radio-button *ngFor="let gender of genders" [value]="gender" class="example-radio-button">
+            {{gender}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="full-width">
+          <mat-label>NIF</mat-label>
+          <input [value]="nif" formControlName="nif" matInput placeholder="NIF">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Profession</mat-label>
+          <input [value]="profession" formControlName="profession" matInput placeholder="Profession">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Billing Adress</mat-label>
+          <input [value]="billing_address" formControlName="billing_address" matInput placeholder="billing_address">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Residence Adress</mat-label>
+          <input [value]="residence_address" formControlName="residence_address" matInput
+                 placeholder="residence_address">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Postal Code</mat-label>
+          <input [value]="postal_code" formControlName="postal_code" matInput placeholder="postal_code">
+        </mat-form-field>
+        <mat-card-actions class="full-width">
+          <h3 id="formMessage"></h3>
+          <button color="primary" mat-raised-button>Save</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </form>
+  </mat-tab>
+</mat-tab-group>

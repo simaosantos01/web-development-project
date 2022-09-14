@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/">Home</a>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/sales">Sales</a>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/customer">Customer</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

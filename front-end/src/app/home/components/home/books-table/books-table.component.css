@@ -1,0 +1,47 @@
+.col-md-6 {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+}
+
+.list-item img {
+  width: 60px;
+  height: 90px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.list-item-details {
+  margin-left: 20px;
+  width: 70%;
+}
+
+.list-item-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.list-item-button button mat-icon {
+  font-size: 18px;
+}
+
+.my-pagination /deep/ .ngx-pagination {
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 0;
+  margin: auto;
+  width: fit-content;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #3f51b5;
+  border: transparent;
+}

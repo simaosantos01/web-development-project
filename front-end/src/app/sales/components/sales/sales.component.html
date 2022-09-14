@@ -1,0 +1,52 @@
+<mat-tab-group (selectedTabChange)="refresh()" *ngIf="getTypeAccount() == 'Customer'" mat-align-tabs="center">
+  <mat-tab label="Sales Dashboard">
+    <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="metric">
+        <th *matHeaderCellDef mat-header-cell> metrics</th>
+        <td *matCellDef="let element" mat-cell> {{element.metric}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="value">
+        <th *matHeaderCellDef mat-header-cell> quantity</th>
+        <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Sell a book">
+    <div class="container d-flex flex-column py-5">
+      <form (ngSubmit)="onSubmitButtonForm()" [formGroup]="salesForm">
+        <mat-stepper #stepper [linear]="isLinear" orientation="vertical">
+          <mat-step [stepControl]="firstFormGroup">
+            <ng-template matStepLabel>Fill out the isbn of the book</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>ISBN</mat-label>
+              <input formControlName="isbn" matInput placeholder="" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Finish</ng-template>
+            <p id="formMessage">Are you Done?</p>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button (click)="stepper.reset()" mat-button type="button">Reset</button>
+              <button mat-button>Save</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<div *ngIf="getTypeAccount() != 'Customer'">
+  <br><br><br>
+  <h1 align="center" class="h1">Unsupported actions..</h1>
+</div>

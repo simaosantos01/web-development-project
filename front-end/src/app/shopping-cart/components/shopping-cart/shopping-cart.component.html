@@ -1,0 +1,83 @@
+<div class="container">
+    <h1 class="h1" *ngIf="injectBooks().length != 0">Shopping Cart</h1>
+    <h1 class="h1" *ngIf="injectBooks().length == 0">Shopping Cart Is Empty...</h1>
+    <div class="col-md-6">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" *ngFor="let item of injectBooks()">
+                <div class="list-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+                        class="rounded" alt="..." *ngIf="item.image == ''">
+                    <img src="{{item.image}}" class="rounded" alt="..." *ngIf="item.image != ''">
+                    <div class="list-item-details">
+                        <p class="mb-1">{{item.title}}</p>
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <h5 class="mb-1">Total: {{injectBookPrice(item.isbn)}}€</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-col">
+                        <div class="list-item-button">
+                            <button mat-icon-button>
+                                <mat-icon class="navbar-content-icon" id="shopp-cart-add-quant-{{item.isbn}}"
+                                    (click)="addQuantity($event)">add_circle
+                                </mat-icon>
+                            </button>
+                            <p>{{item.quantity}}</p>
+                            <button mat-icon-button>
+                                <mat-icon class=" navbar-content-icon" id="shopp-cart-remove-quant-{{item.isbn}}"
+                                    (click)="removeQuantity($event)">
+                                    remove_circle</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon class="navbar-content-icon" id="shopp-cart-remove-item-{{item.isbn}}"
+                                    (click)="removeFromCart($event)">delete</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <select class="form-select form-select-sm select-margin-l"
+                                aria-label=".form-select-sm example" #element (change)="changeType(element.id)"
+                                id="shopp-cart-change-type-{{item.isbn}}">
+                                <option selected value="item.type">{{item.type}}</option>
+                                <div *ngIf="item.type == 'New'; then thenBlock else elseBlock"></div>
+                                <ng-template #thenBlock>
+                                    <option value="Used">Used</option>
+                                </ng-template>
+                                <ng-template #elseBlock>
+                                    <option value="New">New</option>
+                                </ng-template>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item " *ngIf="injectBooks().length > 0">
+                <div class="list-item">
+                    <div class="shopping-cart-details">
+                        <p class="mb-1">Total: {{injectTotal()}}€</p>
+                        <h5 class="mb-1">Subtotal: {{injectSubTotal()}}€</h5>
+                        <h5 class="mb-1">Shipping: {{injectShipping()}}€</h5>
+                        <h5 class="mb-1">VAT: 23%</h5>
+                    </div>
+                    <div class="example-form">
+                        <p class="mb-1">Use Points</p>
+                        <mat-slider tickInterval="1000" step="1000" min="0" max="100000">
+                        </mat-slider>
+                    </div>
+                    <div class="d-flex flex-column justify-items-center">
+                        <div>
+                            <select class="form-select form-select-sm select-margin-b"
+                                aria-label=".form-select-sm example" (change)="setShipping(shipping.value)" #shipping>
+                                <option value="Express">Express</option>
+                                <option value="Default" selected>Default</option>
+                            </select>
+                        </div>
+                        <div class="checkout">
+                            <button type="button" class="btn btn-dark btn-sm" (click)="checkout()">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

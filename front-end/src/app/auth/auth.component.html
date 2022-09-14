@@ -1,0 +1,49 @@
+<div class="auth-container">
+  <mat-card>
+    <mat-card-content>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab label="Sign In">
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+            <h2>Sign In</h2>
+            <mat-error *ngIf="!isAuthValid">
+              The username and password were not recognized
+            </mat-error>
+            <div>
+              <mat-form-field appearance="outline">
+                <input [(ngModel)]="email" matInput name="email" placeholder="Email" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <input [(ngModel)]="password" matInput name="password" placeholder="Password" required type="password">
+              </mat-form-field>
+            </div>
+            <button [disabled]="!loginForm.form.valid" color="primary" mat-raised-button>Sign In</button>
+          </form>
+        </mat-tab>
+        <mat-tab label="Sign Up">
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+            <h2>Sign Up</h2>
+            <div>
+              <mat-form-field appearance="outline">
+                <input [(ngModel)]="name" matInput name="name" placeholder="Name" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <input [(ngModel)]="email" matInput name="email" placeholder="Email" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <input [(ngModel)]="password" matInput name="password" placeholder="Password" required type="password">
+              </mat-form-field>
+            </div>
+            <button [disabled]="!loginForm.form.valid" color="primary" mat-raised-button>Sign Up</button>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+</div>
